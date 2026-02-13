@@ -1,36 +1,141 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js 16 Template (Systems-Grade)
 
-## Getting Started
+A strictly opinionated, production-ready frontend architecture built for durability, automation, and long-term scalability.
+Optimized for **Next.js 16 (App Router)** and **Tailwind CSS v4** with a systems-first approach to structure, consistency, and maintainability.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🛠 Tech Stack
+
+**Framework:** Next.js 16 (App Router)
+**Styling:** Tailwind CSS v4 (CSS-native configuration)
+**Runtime:** Node.js (LF line endings enforced via `.gitattributes`)
+**Package Manager:** pnpm
+**Linting:** ESLint 9 (Flat Config) + typescript-eslint
+**Formatting:** Prettier + prettier-plugin-tailwindcss
+
+This stack is selected to ensure consistency, performance, and long-term maintainability across production systems.
+
+---
+
+## 🏗 Project Structure
+
+```
+src/
+├── app/            # Next.js App Router (routes, layouts, metadata)
+├── components/     # Reusable components
+│   ├── ui/         # Base primitives (buttons, inputs, shadcn, etc.)
+│   └── layout/     # Structural components (navbar, footer, shells)
+├── hooks/          # Custom React hooks
+├── lib/            # Shared utilities & third-party integrations
+├── styles/         # Global CSS & Tailwind v4 theme configuration
+├── types/          # Global TypeScript interfaces and types
+├── config/         # App configuration & environment mappings
+└── constants/      # Immutable system constants
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The structure emphasizes separation of concerns, composability, and predictable scaling as the codebase grows.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚡ Automation Scripts
 
-## Learn More
+| Command         | Action                                       |
+| --------------- | -------------------------------------------- |
+| `pnpm dev`      | Starts development server                    |
+| `pnpm build`    | Production build                             |
+| `pnpm lint`     | Runs lint checks                             |
+| `pnpm lint:fix` | Strict ESLint autofix (imports, unused code) |
+| `pnpm format`   | Runs Prettier across project                 |
+| `pnpm fix:all`  | Full cleanup: Prettier → ESLint autofix      |
 
-To learn more about Next.js, take a look at the following resources:
+These scripts enforce consistency and reduce manual maintenance overhead.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛡 System Features
 
-## Deploy on Vercel
+### 1. Strict Import Sorting
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Imports are automatically grouped and sorted to minimize merge conflicts and maintain clarity.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Order enforced:
+
+1. React / Next internals
+2. External packages
+3. Internal aliases (`@/*`)
+4. Relative paths (`../`, `./`)
+5. Styles (`.css`, `.scss`)
+
+---
+
+### 2. Dead Code Elimination
+
+Unused imports and variables are automatically removed:
+
+- On save (via editor integration)
+- Via `pnpm fix:all`
+
+Variables prefixed with `_` are ignored intentionally to allow placeholder usage.
+
+---
+
+### 3. Tailwind CSS v4 Integration
+
+Tailwind v4 uses a **CSS-first configuration** model.
+Theme tokens are defined directly inside:
+
+```
+src/styles/global.css
+```
+
+Example:
+
+```css
+@theme {
+  --color-primary: #3b82f6;
+  --font-inter: 'Inter', sans-serif;
+}
+```
+
+This approach keeps styling closer to runtime CSS rather than JavaScript config files.
+
+---
+
+### 4. Optional SCSS Migration
+
+If SCSS support is required:
+
+1. Install Sass:
+
+   ```
+   pnpm add -D sass
+   ```
+
+2. Rename:
+
+   ```
+   src/styles/global.css → global.scss
+   ```
+
+3. Update import in:
+
+   ```
+   src/app/layout.tsx
+   ```
+
+The system remains fully compatible with SCSS when needed.
+
+---
+
+## 🎯 Philosophy
+
+This template is built for:
+
+- Long-term maintainability
+- Predictable scaling
+- Minimal technical debt
+- Strong linting and formatting discipline
+- Production-grade frontend systems
+
+Every decision favors durability and clarity over short-term convenience.
