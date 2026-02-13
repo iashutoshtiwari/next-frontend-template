@@ -1,0 +1,34 @@
+{
+  // 1. FORMATTING (PRETTIER)
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "prettier.requireConfig": true,
+  // Tell Prettier strictly where to resolve plugins (Fixes pnpm ghost dependency issues)
+  "prettier.resolveGlobalModules": false,
+
+  // 2. LINTING (ESLINT 9 Strict Mode)
+  "eslint.useFlatConfig": true, // <--- CRITICAL FOR ESLINT 9/MJS
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+
+  // 3. UI & TYPESCRIPT
+  "files.eol": "\n",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.lineHeight": 1.6,
+  "workbench.activityBar.location": "top",
+  "breadcrumbs.enabled": false,
+  "editor.minimap.enabled": false,
+
+  // 4. FILE NESTING (Your Zen Mode)
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, .npmrc, .prettierrc*, .eslintrc*, tsconfig.json, vite.config.*, next.config.*, tailwind.config.*, postcss.config.*",
+    "*.tsx": "$(capture).test.tsx, $(capture).spec.tsx, $(capture).module.css, $(capture).css, $(capture).scss",
+    "*.ts": "$(capture).test.ts, $(capture).spec.ts",
+    "*.js": "$(capture).test.js, $(capture).spec.js, $(capture).map"
+  }
+}
