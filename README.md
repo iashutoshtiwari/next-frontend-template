@@ -20,7 +20,7 @@ This stack is selected to ensure consistency, performance, and long-term maintai
 
 ## 🏗 Project Structure
 
-```
+```text
 src/
 ├── app/            # Next.js App Router (routes, layouts, metadata)
 ├── components/     # Reusable components
@@ -31,6 +31,7 @@ src/
 ├── styles/         # Global CSS & Tailwind v4 theme configuration
 ├── types/          # Global TypeScript interfaces and types
 ├── config/         # App configuration & environment mappings
+├── utils/          # Utilites
 └── constants/      # Immutable system constants
 ```
 
@@ -85,7 +86,7 @@ Variables prefixed with `_` are ignored intentionally to allow placeholder usage
 Tailwind v4 uses a **CSS-first configuration** model.
 Theme tokens are defined directly inside:
 
-```
+```text
 src/styles/global.css
 ```
 
@@ -108,19 +109,19 @@ If SCSS support is required:
 
 1. Install Sass:
 
-   ```
+   ```bash
    pnpm add -D sass
    ```
 
 2. Rename:
 
-   ```
+   ```text
    src/styles/global.css → global.scss
    ```
 
 3. Update import in:
 
-   ```
+   ```text
    src/app/layout.tsx
    ```
 
